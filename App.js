@@ -1,77 +1,41 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* View */}
-      <Header></Header>
-      <CountApp countFirst={1} />
+    <SafeAreaView style={styles.container}>
+      <Header />
+      <View>
+        <View style={[styles.box, styles.box1]} />
+        <View style={[styles.box, styles.box2]} />
+        <View style={[styles.box, styles.box3]} />
+        <View style={[styles.box, styles.box4]} />
+        {/* here priority will be most of box4 not box */}
+      </View>
       <Footer />
-    </View>
-  );
-}
-
-function FirstTest() {
-  return (
-    <View style={styles.second}>
-      <Text>Sarwar ISO App!</Text>
-      <Text style={{ marginTop: 10, marginBottom: 20 }}>
-        Full Stack Software Engineer
-      </Text>
-      <StatusBar style="auto" />
-      <Image
-        source={{
-          uri: "https://avatars.githubusercontent.com/u/108589375?v=4",
-        }}
-        style={{ width: 100, height: 100 }}
-      />
-      <Image
-        source={require("./assets/favicon.png")}
-        style={{ width: 50, height: 50 }}
-      />
-      <Text style={{ color: "white" }}>First Android</Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
 function Header() {
   return (
     <View>
-      <Text>Sarwar Hossain</Text>
+      <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+        Sarwar Android/IOS App
+      </Text>
       <Text>Software Developer</Text>
     </View>
   );
 }
 
-function CountApp(props) {
-  const { countFirst } = props;
-  // console.log(countFirst);
-  const [count, setCount] = useState(0);
-  return (
-    <View style={styles.second}>
-      {/* <Text>{countFirst}</Text> */}
-      <Text>Count: {count}</Text>
-      <TouchableOpacity
-        onPress={() => {
-          setCount(count + 1);
-        }}
-        style={styles.button}
-      >
-        <Text>Increment</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          setCount(count - 1);
-        }}
-        style={{ ...styles.button, marginTop: 10 }}
-      >
-        <Text>Decrement</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
 function Footer() {
   return (
     <View style={styles.footer}>
@@ -86,6 +50,12 @@ function Footer() {
         onPress={() => navigation.navigate("Note")}
       >
         <Text style={styles.itemText}>Note</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.nav}
+        onPress={() => navigation.navigate("Image")}
+      >
+        <Text style={styles.itemText}>Image</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.nav}
@@ -105,28 +75,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     minHeight: "100%",
     paddingTop: 20,
+    flex: 1,
     // gap: 30,
   },
-  second: {
-    width: 200,
-    height: 100,
-    backgroundColor: "red",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 20,
-    marginTop: 120,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "black",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
+
   footer: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -155,5 +107,22 @@ const styles = StyleSheet.create({
   itemText: {
     color: "#007aff",
     fontSize: 16,
+  },
+  box: {
+    height: 100,
+    width: 100,
+  },
+  box1: {
+    backgroundColor: "red",
+  },
+  box2: {
+    backgroundColor: "green",
+  },
+  box3: {
+    backgroundColor: "blue",
+    width: 200,
+  },
+  box4: {
+    backgroundColor: "yellow",
   },
 });
