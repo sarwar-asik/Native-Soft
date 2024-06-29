@@ -1,63 +1,111 @@
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* View */}
-      <View style={styles.second}>
-        <Text>Sarwar ISO App!</Text>
-        <Text style={{ marginTop: 10, marginBottom: 20 }}>
-          Full Stack Software Engineer
-        </Text>
-        <StatusBar style="auto" />
-        <Image
-          source={{
-            uri: "https://avatars.githubusercontent.com/u/108589375?v=4",
-          }}
-          style={{ width: 100, height: 100 }}
-        />
-        {/* Text */}
-        <Text style={{ color: "white" }}>First Android</Text>
-      </View>
-      <View>
-        {/* Image */}
-        <Image
-          source={require("./assets/favicon.png")}
-          style={{ width: 50, height: 50 }}
-        />
-      </View>
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Note")}
-        >
-          <Text style={styles.buttonText}>Note</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Text style={styles.buttonText}>Profile</Text>
-        </TouchableOpacity>
-      </View>
+      <Header></Header>
+      <CountApp countFirst={1} />
+      <Footer />
     </View>
   );
 }
 
+function FirstTest() {
+  return (
+    <View style={styles.second}>
+      <Text>Sarwar ISO App!</Text>
+      <Text style={{ marginTop: 10, marginBottom: 20 }}>
+        Full Stack Software Engineer
+      </Text>
+      <StatusBar style="auto" />
+      <Image
+        source={{
+          uri: "https://avatars.githubusercontent.com/u/108589375?v=4",
+        }}
+        style={{ width: 100, height: 100 }}
+      />
+      <Image
+        source={require("./assets/favicon.png")}
+        style={{ width: 50, height: 50 }}
+      />
+      <Text style={{ color: "white" }}>First Android</Text>
+    </View>
+  );
+}
+
+function Header() {
+  return (
+    <View>
+      <Text>Sarwar Hossain</Text>
+      <Text>Software Developer</Text>
+    </View>
+  );
+}
+
+function CountApp(props) {
+  const { countFirst } = props;
+  // console.log(countFirst);
+  const [count, setCount] = useState(0);
+  return (
+    <View style={styles.second}>
+      {/* <Text>{countFirst}</Text> */}
+      <Text>Count: {count}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setCount(count + 1);
+        }}
+        style={styles.button}
+      >
+        <Text>Increment</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          setCount(count - 1);
+        }}
+        style={{ ...styles.button, marginTop: 10 }}
+      >
+        <Text>Decrement</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+function Footer() {
+  return (
+    <View style={styles.footer}>
+      <TouchableOpacity
+        style={styles.nav}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Text style={styles.itemText}>Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.nav}
+        onPress={() => navigation.navigate("Note")}
+      >
+        <Text style={styles.itemText}>Note</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.nav}
+        onPress={() => navigation.navigate("Profile")}
+      >
+        <Text style={styles.itemText}>Profile</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 30,
+    flexDirection: "column",
+    minHeight: "100%",
+    paddingTop: 20,
+    // gap: 30,
   },
   second: {
     width: 200,
@@ -88,11 +136,23 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: "#e7e7e7",
   },
-  button: {
+  nav: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
-  buttonText: {
+  button: {
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#007aff",
+    shadowColor: "#000",
+  },
+  itemText: {
     color: "#007aff",
     fontSize: 16,
   },
